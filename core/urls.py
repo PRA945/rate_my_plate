@@ -3,6 +3,8 @@ from .views import *
 
 urlpatterns = patterns('',
   url(r'^$', Home.as_view(), name='home'),
+  url(r'^user/', include('registration.backends.simple.urls')),
+  url(r'^user/', include('django.contrib.auth.urls')),
   url(r'^question/create/$', QuestionCreateView.as_view(), name='question_create'),
   url(r'^success/$', Success.as_view(), name="success"),
   url(r'^user/', include('registration.backends.simple.urls')),
