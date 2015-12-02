@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView, ListView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView
 from django.core.urlresolvers import reverse_lazy
 from .models import *
 
@@ -23,3 +23,7 @@ class Success(TemplateView):
 class QuestionListView(ListView):
   model = Question
   template_name = 'question/question_list.html'
+  
+class QuestionDetailView(DetailView):
+  model = Question
+  template_name = 'question/question_detail.html'
