@@ -10,8 +10,6 @@ urlpatterns = patterns('',
                        url(r'^question/(?P<pk>\d+)/$', QuestionDetailView.as_view(), name='question_detail'),
                        url(r'^question/update/(?P<pk>\d+)/$', QuestionUpdateView.as_view(), name='question_update'),
                        url(r'^question/delete/(?P<pk>\d+)/$', QuestionDeleteView.as_view(), name='question_delete'),
-url(r'^success/$', Success.as_view(), name="success"),
-url(r'^user/', include('registration.backends.simple.urls')),
-url(r'^user/', include('django.contrib.auth.urls')),
+                       url(r'^success/$', Success.as_view(), name="success"),
 
-)
+                      )
