@@ -9,7 +9,8 @@
   <h1> Welcome to Rate Your Plate </h1>
   <p> The food rating app for everyone </p>
   <p><a class="btn btn-lg btn-primary" href="{% url 'registration_register' %}">Sign up</a></p>
-  <p><a href="{% url 'question_create' %}" class="btn btn-lg btn-primary">Submit question</a></p>
+  <p><a class="btn btn-lg btn-primary" href="{% url 'auth_login' %}">Login</a></p>
+
 </div>
 {% endif %}
 {% endblock %}
