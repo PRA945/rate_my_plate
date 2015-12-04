@@ -9,7 +9,7 @@ class Home(TemplateView):
 
 class QuestionCreateView(CreateView):
   model = Question
-  template_name = "question/question_form.html"
+  template_name = 'question/question_form.html'
   fields = ['title', 'description']
   success_url = reverse_lazy('question_list')
   
@@ -35,6 +35,6 @@ class QuestionUpdateView(UpdateView):
   
 class QuestionDeleteView(DeleteView):
   model = Question
-  template_name = 'question/wuestion_confirm_delete.html'
+  template_name = 'question/question_confirm_delete.html'
   success_url = reverse_lazy('question_list')
   
