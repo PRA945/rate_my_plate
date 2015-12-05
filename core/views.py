@@ -35,6 +35,8 @@ class QuestionDetailView(DetailView):
     question= Question.objects.get(id=self.kwargs['pk'])
     answers = Answer.objects.filter(question=question)
     context['answers'] = answers
+    user_answers= Answer.objects.filter(question=question, user=self.request.user)
+    context['user_answers'] = user_answers
     return context
 
 class QuestionUpdateView(UpdateView):
@@ -126,8 +128,16 @@ class VoteFormView(FormView):
     return redirect('question_list')
 
 class UserDetailView(DetailView):
-  model = User
-  slug_field = 'username'
-  template_name = 'user/user_detail.html'
-  context_object_name = 'user_in_view'
-  
+    model = User
+    slug_field = 'username'
+    template_name = 'user/user_detail.html'
+    context_object_name = 'user_in_view'
+
+    def get_context_data(self, **kwargs):
+      context = super(UserDetailView, self).get_context_data(**kwargs)
+      user_in_view = User.objects.get(username=self.kwargs['slug'])
+      questions = Question.objects.filter(user=user_in_view)
+      context['questions'] = questions
+      answers = Answer.objects.filter(user=user_in_view)
+      context['answers'] = answers
+      return context 
