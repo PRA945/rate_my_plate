@@ -27,10 +27,16 @@ class QuestionListView(ListView):
   template_name = 'question/question_list.html'
   paginate_by = 5
 
+  def get_context_data(self, **kwargs):
+    context = super(QuestionListView, self).get_context_data(**kwargs)
+    user_votes = Question.objects.filter(vote__user=self.request.user)
+    context['user_votes'] = user_votes
+    return context
+
 class QuestionDetailView(DetailView):
   model = Question
   template_name = 'question/question_detail.html'
-  
+
 
   def get_context_data(self, **kwargs):
     context = super(QuestionDetailView, self).get_context_data(**kwargs)
@@ -39,6 +45,8 @@ class QuestionDetailView(DetailView):
     context['answers'] = answers
     user_answers= Answer.objects.filter(question=question, user=self.request.user)
     context['user_answers'] = user_answers
+    user_votes = Answer.objects.filter(vote__user=self.request.user)
+    context['user_votes'] = user_votes
     return context
 
 class QuestionUpdateView(UpdateView):
@@ -183,4 +191,3 @@ class SearchQuestionListView(QuestionListView):
   def get_queryset(self):
     incoming_query_string = self.request.GET.get('query','')
     return Question.objects.filter(title__icontains=incoming_query_string)
-  
