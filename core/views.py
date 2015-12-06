@@ -29,6 +29,7 @@ class QuestionListView(ListView):
 class QuestionDetailView(DetailView):
   model = Question
   template_name = 'question/question_detail.html'
+  paginate_by = 5
 
   def get_context_data(self, **kwargs):
     context = super(QuestionDetailView, self).get_context_data(**kwargs)
