@@ -12,7 +12,7 @@ class Home(TemplateView):
 class QuestionCreateView(CreateView):
   model = Question
   template_name = 'question/question_form.html'
-  fields = ['title', 'description']
+  fields = ['title', 'description', 'image_file']
   success_url = reverse_lazy('question_list')
 
   def form_valid(self, form):
@@ -52,7 +52,7 @@ class QuestionDetailView(DetailView):
 class QuestionUpdateView(UpdateView):
   model = Question
   template_name = 'question/question_form.html'
-  fields = ['title', 'description']
+  fields = ['title', 'description', 'image_file']
 
   def get_object(self, *args, **kwargs):
     object = super(QuestionUpdateView, self).get_object(*args, **kwargs)
@@ -182,7 +182,7 @@ class UserDeleteView(DeleteView):
       return object
 
   def delete(self, request, *args, **kwargs):
-      user = super (UserDeleteView, self).get_object(*args)
+      user = super(UserDeleteView, self).get_object(*args)
       user.is_active = False
       user.save()
       return redirect(self.get_success_url())
