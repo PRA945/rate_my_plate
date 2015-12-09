@@ -1,17 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
 {% for question in object_list %}
-<div class="panel">
+<div class="row">
+<div class="col-md-6" style="padding-top:20px;">{% if question.image_file %}<img src="{{ question.image_file.url }}" style="max-width: 100%; height: auto;"/>{% endif %}</div>
+<div class="col-md-6">
   <h3><a href="{{ question.get_absolute_url }}">{{ question.title }}</a></h3>
   <p>Asked by <a href="{% url 'user_detail' slug=question.user.username %}">{{ question.user.username }}</a> on {{ question.created_at }}</p>
-  
+
   <form method="post" action="{% url 'vote' %}">
     <span class="badge">{{ question.answer_set.all.count }} Answer{{  question.answer_set.all.count|pluralize }}</span>
-    <span class="badge">{{ question.vote_set.all.count }} Vote{{ question.vote_set.all.count|pluralize }}</span> 
+    <span class="badge">{{ question.vote_set.all.count }} Vote{{ question.vote_set.all.count|pluralize }}</span>
     {% csrf_token %}
     <input type="hidden" name="question" value="{{ question.id }}" />
     <input type="hidden" name="user" value="{{ user.id }}" />
-        {% if question in user_votes %}  
+        {% if question in user_votes %}
         <button class="btn btn-link">
           <span class="glyphicon glyphicon-thumbs-down"></span>
         </button>
@@ -21,6 +23,7 @@
         </button>
         {% endif %}
     </form>
+</div>
 </div>
 {% empty %}
 <p>No results found.</p>

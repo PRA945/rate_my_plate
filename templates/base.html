@@ -25,7 +25,7 @@
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
             <form action="{% url 'search' %}" class="navbar-form navbar-left" method="get">
-              <input type="text" placeholder="Search" class="form-control" name="query"> 
+              <input type="text" placeholder="Search" class="form-control" name="query">
             </form>
             <li><a href="{% url 'question_list' %}">Feed</a><li>
             <li><a href="{% url 'question_create' %}">Post Review</a></li>

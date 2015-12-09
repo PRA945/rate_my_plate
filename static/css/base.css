@@ -1,3 +1,7 @@
 body {
     padding-top: 80px;
+    background: url('../images/plate.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
 }
